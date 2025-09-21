@@ -28,9 +28,9 @@ genderTerms = sorted({str(k).lower() for k in gendered_word_pairs.keys()} |
 gender_swap_data = augment_with_gender_swap(train_data, gendered_word_pairs)
 gender_mask_data = augment_with_gender_mask(train_data, gendered_word_pairs)
 
-print(train_data.head())
-print(gender_swap_data.head())
-print(gender_mask_data.head())
+#print(train_data.head())
+#print(gender_swap_data.head())
+#print(gender_mask_data.head())
 
 # add the gender swapped rows to the original data
 gender_swap_data = pd.concat([train_data, gender_swap_data], ignore_index=True)

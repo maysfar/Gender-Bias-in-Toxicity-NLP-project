@@ -5,13 +5,17 @@ import re
 def _compile_gender_mask_regex_from_terms(terms):
     """
     Build a single case-insensitive regex that matches any term
-    (plus simple plural/possessive tails like s/es/'s).
+    (plus simple plural/possessive tails like s/'s/’s),
+    but avoids false positives inside contractions or larger words.
     """
     if not terms:
         return re.compile(r"(?!x)x", flags=re.IGNORECASE)  # never matches
+
     # longest-first to avoid partial overlaps (e.g., 'herself' before 'her')
     vocab = sorted({t.lower() for t in terms}, key=len, reverse=True)
-    pattern = r"\b(?:%s)(?:['’]s|s|es)?\b" % "|".join(map(re.escape, vocab))
+
+    pattern = r'(?<!\w)(?:%s)(?=(?:\'s|’s|s|es)?(?![\w’\']))' % "|".join(map(re.escape, vocab))
+
     return re.compile(pattern, flags=re.IGNORECASE)
 
 def comment_gender_mask(text, genderTerms, token="[GENDER]"):
