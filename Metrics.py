@@ -93,12 +93,12 @@ def positive_aeg(labels, scores, subgroup_mask) :
         np.zeros(scores_background_pos.size, dtype=int),
     ])
     tmp_scores = np.concatenate([scores_subgroup_pos, scores_background_pos])
-    return _safe_auc(tmp_labels, tmp_scores) - 0.5
+    return 0.5 - _safe_auc(tmp_labels, tmp_scores)
 
 
 def negative_aeg(labels, scores, subgroup_mask) :
     """
-    Negative AEG = AUC( S^- vs B^- ) - 0.5
+    Negative AEG = 0.5- AUC( S^- vs B^- )
     Threshold-free shift among negatives (centered at 0).
       > 0: subgroup negatives get higher scores (FP risk).
       < 0: subgroup negatives get lower scores.
@@ -114,5 +114,5 @@ def negative_aeg(labels, scores, subgroup_mask) :
         np.zeros(scores_background_neg.size, dtype=int),
     ])
     tmp_scores = np.concatenate([scores_subgroup_neg, scores_background_neg])
-    return _safe_auc(tmp_labels, tmp_scores) - 0.5
+    return 0.5 - _safe_auc(tmp_labels, tmp_scores) 
 
