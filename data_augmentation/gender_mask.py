@@ -36,18 +36,8 @@ def augment_with_gender_mask(df, genderTerms, text_col="comment", token="[GENDER
     rx = _compile_gender_mask_regex_from_terms(genderTerms)
 
     # 1) produce masked texts for all rows
-    masked_texts = df[text_col].astype(str).apply(lambda t: rx.sub(token, t))
+    df[text_col] = df[text_col].astype(str).apply(lambda t: rx.sub(token, t))
 
-    # 2) find rows where text actually changed
-    changed = ~masked_texts.eq(df[text_col].astype(str))
-    if not changed.any():
-        return df.copy()
+    return df # return only the masked data
 
-    # 3) take only changed rows, set new text
-    aug = df.loc[changed].copy()
-    aug[text_col] = masked_texts.loc[changed].values
-
-
-    # 5) return original + augmented rows
-    return aug # return only the masked data
 
