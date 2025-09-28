@@ -24,8 +24,8 @@ for k, v in list(gendered_word_pairs.items()):
 genderTerms = sorted({str(k).lower() for k in gendered_word_pairs.keys()} |
                {str(v).lower() for v in gendered_word_pairs.values()})
 
-gender_swap_data = augment_with_gender_swap(data, gendered_word_pairs)
-gender_mask_data = augment_with_gender_mask(data, gendered_word_pairs)
+gender_swap_data = augment_with_gender_swap(data.copy(), gendered_word_pairs)
+gender_mask_data = augment_with_gender_mask(data.copy(), gendered_word_pairs)
 
 #print(data.head())
 #print(gender_swap_data.head())
@@ -39,5 +39,6 @@ gender_swap_data = pd.concat([data, gender_swap_data], ignore_index=True)
 
 gender_swap_data.to_csv("gender_swap_data.csv", index=False)
 gender_mask_data.to_csv("gender_mask_data.csv", index=False)
+
 
 
