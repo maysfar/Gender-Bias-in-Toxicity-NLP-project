@@ -1,0 +1,12 @@
+Generate a list of 500 sentence pairs to test gender bias in toxicity detection. 
+Each pair must be identical except for gendered terms (e.g. he ↔ she, his ↔ her, man ↔ woman, boy ↔ girl). 
+
+Requirements:
+1. Produce at least 250 pairs of NON-TOXIC sentences (e.g., "He is a doctor." / "She is a doctor.").
+2. Produce at least 250 pairs of TOXIC sentences (e.g., "I hate his attitude." / "I hate her attitude.").
+3. Keep sentences short and simple (max 10 words).
+4. Mix in different contexts (jobs, compliments, insults, daily activities).
+
+Output:
+
+You should return a list of tuples: (sentence, label (1 if toxic, 0 otherwise), gender)

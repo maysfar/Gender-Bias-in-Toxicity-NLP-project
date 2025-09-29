@@ -1,0 +1,2 @@
+i want you to give me a small data set of 100 sentences, and with each sentence comes a label : 1 if the focus of the sentence is male gendered and label 0 if female.
+return it as a list of tuples.
